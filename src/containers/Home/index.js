@@ -5,13 +5,7 @@ import React from 'react';
 import {push} from 'react-router-redux';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-
-import {
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync
-} from '../../modules/counter';
+import {COUNTER_INCREMENT, COUNTER_DECREMENT, COUNTER_INCREMENT_ASYNC, COUNTER_DECREMENT_ASYNC} from '../../actions/counter'
 
 const Home = props => (
   <div>
@@ -38,13 +32,44 @@ const mapStateToProps = state=>({
   isDecrementing: state.counter.isDecrementing
 });
 
-const mapDispatchToprops = dispatch => bindActionCreators({
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync,
-  changePage: () => push('/about-us')
+
+// const mapDispatchToProps = dispatch =>{
+//     return{
+//         decrement:()=>{
+//             dispatch(COUNTER_DECREMENT({name:'foo'}));
+//         },
+//         increment: ()=>{
+//             dispatch(COUNTER_INCREMENT({name:'foo'}));
+//         },
+//         incrementAsync: ()=>{
+//             dispatch(COUNTER_INCREMENT_ASYNC({name: 'foo'}))
+//         },
+//         changePage: () => {
+//             dispatch(push('/about-us'))
+//         }
+//     }
+// };
+function increment(text){
+    return COUNTER_INCREMENT({name:text})
+}
+const decrement = () => {
+    return COUNTER_DECREMENT({
+            payload:{"name":'foo'}
+        });
+};
+const incrementAsync = ()=>{
+    return COUNTER_INCREMENT_ASYNC({});
+};
+const decrementAsync = ()=>{
+    return COUNTER_DECREMENT_ASYNC({});
+};
+const mapDispatchToProps = dispatch => bindActionCreators({
+    decrement,
+    increment,
+    incrementAsync,
+    decrementAsync,
+    changePage: () => push('/about-us')
 }, dispatch);
 
 
-export  default connect(mapStateToProps, mapDispatchToprops)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
