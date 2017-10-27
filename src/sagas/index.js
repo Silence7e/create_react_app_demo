@@ -10,6 +10,7 @@ import types from '../actions/app';
 //import routeChange from "./routeChange";
 import userService from "./userService";
 import counter from './counter'
+import routeChange from './routeChange'
 
 
 function main (sagas, initializer, ...args) {
@@ -35,6 +36,7 @@ function main (sagas, initializer, ...args) {
 }
 const sagas = [
     userService,
-    counter
+    counter,
+    routeChange
 ];
 export default main(sagas);

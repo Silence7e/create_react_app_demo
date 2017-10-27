@@ -13,7 +13,6 @@ import {delay}  from 'redux-saga'
 export default  function *() {
     while (true) {
         const action = yield  take([COUNTER_INCREMENT_ASYNC, types.COUNTER_DECREMENT_ASYNC]);
-        console.log(action);
         yield call(delay, 1000);
         yield fork(delay, 2000);
         if (action.type === types.COUNTER_INCREMENT_ASYNC) {
